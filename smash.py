@@ -6,7 +6,7 @@ from pytz import timezone
 
 activityId = 321998419
 
-client = Client(access_token="")
+client = Client(access_token="#YOUR ACCESS TOKEN#")
 activity = client.get_activity(activityId)
 
 localtz = timezone(str(activity.timezone))
@@ -36,10 +36,6 @@ for idx in range(0,waypointCount):
     duration.append(int(current - cumulPause))
     cumulPause = cumulPause + (streams['time'].data[idx] - current)
 
-print streams['time'].data
-print streams['moving'].data
-print duration
-
 distance = []
 for idx in range(0,waypointCount):
   distance.append(float(streams['distance'].data[idx] / 1000))
@@ -57,7 +53,7 @@ parameters = {
 
 headers = {
     'Content-Type': "application/json",
-    'Authorization': "Bearer "
+    'Authorization': "Bearer #YOUR ACCESS TOKEN#"
 }
 
 data = json.dumps(parameters)
