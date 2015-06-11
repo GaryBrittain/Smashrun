@@ -32,9 +32,12 @@ for idx in range(0,waypointCount):
   elif streams['moving'].data[idx] == True:
     duration.append(int(streams['time'].data[idx]) - cumulPause)
     current = (streams['time'].data[idx])
+  elif streams['moving'].data[idx] == False and streams['moving'].data[idx-1] == False:
+    duration.append(duration[idx-1])
+    cumulPause = cumulPause + (streams['time'].data[idx] - streams['time'].data[idx-1])
   elif streams['moving'].data[idx] == False:
     duration.append(int(current - cumulPause))
-    cumulPause = cumulPause + (streams['time'].data[idx] - current)
+    cumulPause = cumulPause + (streams['time'].data[idx] - streams['time'].data[idx-1])
 
 distance = []
 for idx in range(0,waypointCount):
